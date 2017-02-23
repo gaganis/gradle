@@ -29,7 +29,6 @@ import org.gradle.api.internal.tasks.compile.DefaultGroovyJavaJointCompileSpecFa
 import org.gradle.api.internal.tasks.compile.GroovyCompilerFactory;
 import org.gradle.api.internal.tasks.compile.GroovyJavaJointCompileSpec;
 import org.gradle.api.internal.tasks.compile.JavaCompilerFactory;
-import org.gradle.api.internal.tasks.compile.daemon.InProcessCompilerDaemonFactory;
 import org.gradle.api.tasks.CacheableTask;
 import org.gradle.api.tasks.Classpath;
 import org.gradle.api.tasks.Internal;
@@ -38,10 +37,10 @@ import org.gradle.api.tasks.PathSensitive;
 import org.gradle.api.tasks.PathSensitivity;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.api.tasks.WorkResult;
-import org.gradle.internal.operations.BuildOperationWorkerRegistry;
 import org.gradle.language.base.internal.compile.Compiler;
-import org.gradle.workers.internal.WorkerDaemonManager;
 import org.gradle.util.GFileUtils;
+import org.gradle.workers.internal.InProcessCompilerDaemonFactory;
+import org.gradle.workers.internal.WorkerDaemonManager;
 
 import java.io.File;
 import java.util.List;
