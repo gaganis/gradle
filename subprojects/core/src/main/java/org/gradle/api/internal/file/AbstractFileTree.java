@@ -103,6 +103,10 @@ public abstract class AbstractFileTree extends AbstractFileCollection implements
                 fileDetails.getFile();
                 hasContent.set(true);
             }
+
+            public boolean ignoreBrokenSymlinks() {
+                return false;
+            }
         });
         return hasContent.get();
     }
@@ -135,6 +139,11 @@ public abstract class AbstractFileTree extends AbstractFileCollection implements
             @Override
             public void visitFile(FileVisitDetails fileDetails) {
                 visitor.execute(fileDetails);
+            }
+
+            @Override
+            public boolean ignoreBrokenSymlinks() {
+                return false;
             }
         });
     }
@@ -181,6 +190,12 @@ public abstract class AbstractFileTree extends AbstractFileCollection implements
                         visitor.visitFile(fileDetails);
                     }
                 }
+
+                @Override
+                public boolean ignoreBrokenSymlinks() {
+                    return visitor.ignoreBrokenSymlinks();
+                }
+
             });
             return this;
         }

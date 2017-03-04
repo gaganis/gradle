@@ -151,6 +151,11 @@ public class PackageListGenerator extends DefaultTask {
                     throw new UncheckedIOException(e);
                 }
             }
+
+            @Override
+            public boolean ignoreBrokenSymlinks() {
+                return false;
+            }
         });
     }
 

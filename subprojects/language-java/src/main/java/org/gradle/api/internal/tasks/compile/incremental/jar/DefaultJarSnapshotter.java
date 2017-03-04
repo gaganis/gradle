@@ -68,6 +68,11 @@ class DefaultJarSnapshotter {
 
                 hashes.put(analysis.getClassName(), classFileHash);
             }
+
+            @Override
+            public boolean ignoreBrokenSymlinks() {
+                return false;
+            }
         });
 
         return new JarSnapshot(new JarSnapshotData(hash, hashes, accumulator.getAnalysis()));

@@ -217,6 +217,11 @@ public class TarFileTree implements MinimalFileTree, FileSystemMirroringFileTree
                 public void visitFile(FileVisitDetails fileDetails) {
                     visitor.visitFile(new DefaultFileVisitDetails(fileDetails.getFile(), chmod, stat));
                 }
+
+                @Override
+                public boolean ignoreBrokenSymlinks() {
+                    return false;
+                }
             });
         }
     }

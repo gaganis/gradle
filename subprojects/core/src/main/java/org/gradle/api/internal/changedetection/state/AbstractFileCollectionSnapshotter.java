@@ -50,13 +50,15 @@ public abstract class AbstractFileCollectionSnapshotter implements FileCollectio
     private final FileSystem fileSystem;
     private final DirectoryFileTreeFactory directoryFileTreeFactory;
     private final FileSystemMirror fileSystemMirror;
+    private boolean ignoreBrokenSymlinks;
 
-    public AbstractFileCollectionSnapshotter(FileHasher hasher, StringInterner stringInterner, FileSystem fileSystem, DirectoryFileTreeFactory directoryFileTreeFactory, FileSystemMirror fileSystemMirror) {
+    public AbstractFileCollectionSnapshotter(FileHasher hasher, StringInterner stringInterner, FileSystem fileSystem, DirectoryFileTreeFactory directoryFileTreeFactory, FileSystemMirror fileSystemMirror, boolean ignoreBrokenSymlinks) {
         this.hasher = hasher;
         this.stringInterner = stringInterner;
         this.fileSystem = fileSystem;
         this.directoryFileTreeFactory = directoryFileTreeFactory;
         this.fileSystemMirror = fileSystemMirror;
+        this.ignoreBrokenSymlinks = ignoreBrokenSymlinks;
     }
 
     public void registerSerializers(SerializerRegistry registry) {
@@ -219,6 +221,11 @@ public abstract class AbstractFileCollectionSnapshotter implements FileCollectio
         @Override
         public void visitFile(FileVisitDetails fileDetails) {
             fileTreeElements.add(new DefaultFileDetails(getPath(fileDetails.getFile()), fileDetails.getRelativePath(), RegularFile, false, fileSnapshot(fileDetails)));
+        }
+
+        @Override
+        public boolean ignoreBrokenSymlinks() {
+            return ignoreBrokenSymlinks;
         }
     }
 }

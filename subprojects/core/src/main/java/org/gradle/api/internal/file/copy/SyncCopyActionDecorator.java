@@ -109,5 +109,10 @@ public class SyncCopyActionDecorator implements CopyAction {
                 }
             }
         }
+
+        @Override
+        public boolean ignoreBrokenSymlinks() {
+            return false;
+        }
     }
 }

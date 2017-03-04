@@ -161,5 +161,10 @@ public class JavaScriptMinify extends SourceTask {
             // Capture the relative file
             relativeFiles.add(new RelativeFile(fileDetails.getFile(), fileDetails.getRelativePath()));
         }
+
+        @Override
+        public boolean ignoreBrokenSymlinks() {
+            return false;
+        }
     }
 }

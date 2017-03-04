@@ -166,6 +166,11 @@ public class TarTaskOutputPacker implements TaskOutputPacker {
                     throw new UncheckedIOException(e);
                 }
             }
+
+            @Override
+            public boolean ignoreBrokenSymlinks() {
+                return false;
+            }
         };
         directoryWalkerFactory.create().walkDir(directory, RelativePath.EMPTY_ROOT, visitor, Specs.satisfyAll(), new AtomicBoolean(), false);
     }

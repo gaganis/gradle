@@ -70,4 +70,9 @@ public class CopyFileVisitorImpl implements ReproducibleFileVisitor {
     public boolean isReproducibleFileOrder() {
         return reproducibleFileOrder;
     }
+
+    @Override
+    public boolean ignoreBrokenSymlinks() {
+        return false;
+    }
 }

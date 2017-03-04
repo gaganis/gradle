@@ -39,7 +39,7 @@ public class DefaultClasspathSnapshotter extends AbstractFileCollectionSnapshott
     private final ClasspathEntryHasher classpathEntryHasher;
 
     public DefaultClasspathSnapshotter(FileHasher hasher, StringInterner stringInterner, FileSystem fileSystem, DirectoryFileTreeFactory directoryFileTreeFactory, FileSystemMirror fileSystemMirror, ClasspathEntryHasher classpathEntryHasher) {
-        super(hasher, stringInterner, fileSystem, directoryFileTreeFactory, fileSystemMirror);
+        super(hasher, stringInterner, fileSystem, directoryFileTreeFactory, fileSystemMirror, false);
         this.classpathEntryHasher = classpathEntryHasher;
     }
 

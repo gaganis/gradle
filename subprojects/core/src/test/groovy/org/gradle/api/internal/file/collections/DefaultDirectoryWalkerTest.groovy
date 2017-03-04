@@ -241,6 +241,10 @@ class DefaultDirectoryWalkerTest extends AbstractProjectBuilderSpec {
             handleDetails(fileDetails)
         }
 
+        boolean ignoreBrokenSymlinks() {
+            return false
+        }
+
         private void handleDetails(FileVisitDetails details) {
             def file = details.getFile()
             assert expectedVisitations[0].contains(file)

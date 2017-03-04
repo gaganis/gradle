@@ -54,6 +54,11 @@ public class ClassFilesAnalyzer implements FileVisitor {
         accumulator.addClass(fileDetails.getFile(), analysis);
     }
 
+    @Override
+    public boolean ignoreBrokenSymlinks() {
+        return false;
+    }
+
     public ClassSetAnalysisData getAnalysis() {
         return accumulator.getAnalysis();
     }

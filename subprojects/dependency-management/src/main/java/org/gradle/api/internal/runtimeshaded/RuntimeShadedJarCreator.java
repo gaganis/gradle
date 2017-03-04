@@ -179,6 +179,11 @@ class RuntimeShadedJarCreator {
             public void visitFile(FileVisitDetails fileDetails) {
                 fileVisitDetails.add(fileDetails);
             }
+
+            @Override
+            public boolean ignoreBrokenSymlinks() {
+                return false;
+            }
         });
 
         // We need to sort here since the file order obtained from the filesystem

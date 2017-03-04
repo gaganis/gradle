@@ -57,6 +57,11 @@ public class SerializableCoffeeScriptCompileSpec implements Serializable {
             public void visitFile(FileVisitDetails fileDetails) {
                 targets.add(new RelativeFile(fileDetails.getFile(), fileDetails.getRelativePath()));
             }
+
+            @Override
+            public boolean ignoreBrokenSymlinks() {
+                return false;
+            }
         });
     }
 

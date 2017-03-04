@@ -194,6 +194,11 @@ public class ValidateTaskProperties extends DefaultTask implements VerificationT
                     }
                 }
             }
+
+            @Override
+            public boolean ignoreBrokenSymlinks() {
+                return false;
+            }
         });
         List<String> problemMessages = toProblemMessages(taskValidationProblems);
         storeResults(problemMessages, getOutputFile());

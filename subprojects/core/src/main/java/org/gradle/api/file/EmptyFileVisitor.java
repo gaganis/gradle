@@ -24,4 +24,8 @@ public class EmptyFileVisitor implements FileVisitor {
     public void visitDir(FileVisitDetails dirDetails) { }
 
     public void visitFile(FileVisitDetails fileDetails) { }
+
+    public boolean ignoreBrokenSymlinks() {
+        return false;
+    }
 }

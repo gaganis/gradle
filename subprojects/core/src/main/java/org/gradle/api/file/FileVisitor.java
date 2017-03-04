@@ -32,4 +32,6 @@ public interface FileVisitor {
      * @param fileDetails Meta-info about the file.
      */
     void visitFile(FileVisitDetails fileDetails);
+
+    boolean ignoreBrokenSymlinks();
 }

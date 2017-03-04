@@ -70,6 +70,10 @@ class AbstractSnapshotNormalizationStrategyTest extends AbstractProjectBuilderSp
                     void visitFile(FileVisitDetails fileDetails) {
                         fileTreeElements.add(new DefaultFileDetails(fileDetails.file.path, fileDetails.relativePath, FileType.RegularFile, false, new FileHashSnapshot(HashCode.fromInt(1))))
                     }
+
+                    boolean ignoreBrokenSymlinks() {
+                        return false
+                    }
                 })
             }
         }

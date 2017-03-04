@@ -218,5 +218,10 @@ public class TwirlCompile extends SourceTask {
         public void visitFile(FileVisitDetails fileDetails) {
             relativeFiles.add(new RelativeFile(fileDetails.getFile(), fileDetails.getRelativePath()));
         }
+
+        @Override
+        public boolean ignoreBrokenSymlinks() {
+            return false;
+        }
     }
 }
