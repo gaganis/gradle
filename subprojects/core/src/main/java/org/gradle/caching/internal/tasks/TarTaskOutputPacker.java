@@ -167,7 +167,7 @@ public class TarTaskOutputPacker implements TaskOutputPacker {
                 }
             }
         };
-        directoryWalkerFactory.create().walkDir(directory, RelativePath.EMPTY_ROOT, visitor, Specs.satisfyAll(), new AtomicBoolean(), false);
+        directoryWalkerFactory.create().walkDir(directory, RelativePath.EMPTY_ROOT, visitor, Specs.satisfyAll(), new AtomicBoolean(), false, false);
     }
 
     private void storeFileProperty(String propertyPath, File file, TarOutputStream outputStream) throws IOException {

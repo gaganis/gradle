@@ -139,14 +139,14 @@ public class DirectoryFileTree implements MinimalFileTree, PatternFilterableFile
      * (but not the directory itself) will be checked with {@link #isAllowed(FileTreeElement, Spec)} and notified to
      * the listener.  If it is a file, the file will be checked and notified.
      */
-    public void visitFrom(FileVisitor visitor, File fileOrDirectory, RelativePath path) {
+    public void visitFrom(FileVisitor visitor, File fileOrDirectory, RelativePath path, boolean ignoreBrokenSymlinks) {
         AtomicBoolean stopFlag = new AtomicBoolean();
         Spec<FileTreeElement> spec = patternSet.getAsSpec();
         if (fileOrDirectory.exists()) {
             if (fileOrDirectory.isFile()) {
                 processSingleFile(fileOrDirectory, visitor, spec, stopFlag);
             } else {
-                walkDir(fileOrDirectory, path, visitor, spec, stopFlag);
+                walkDir(fileOrDirectory, path, visitor, spec, stopFlag, ignoreBrokenSymlinks);
             }
         } else {
             LOGGER.info("file or directory '{}', not found", fileOrDirectory);
@@ -161,14 +161,14 @@ public class DirectoryFileTree implements MinimalFileTree, PatternFilterableFile
         }
     }
 
-    private void walkDir(File file, RelativePath path, FileVisitor visitor, Spec<FileTreeElement> spec, AtomicBoolean stopFlag) {
+    private void walkDir(File file, RelativePath path, FileVisitor visitor, Spec<FileTreeElement> spec, AtomicBoolean stopFlag, boolean ignoreBrokenSymlinks) {
         DirectoryWalker directoryWalker;
         if (visitor instanceof ReproducibleFileVisitor && ((ReproducibleFileVisitor) visitor).isReproducibleFileOrder()) {
             directoryWalker = REPRODUCIBLE_DIRECTORY_WALKER;
         } else {
             directoryWalker = directoryWalkerFactory.create();
         }
-        directoryWalker.walkDir(file, path, visitor, spec, stopFlag, postfix);
+        directoryWalker.walkDir(file, path, visitor, spec, stopFlag, postfix, ignoreBrokenSymlinks);
     }
 
     static boolean isAllowed(FileTreeElement element, Spec<? super FileTreeElement> spec) {

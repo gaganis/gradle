@@ -79,7 +79,7 @@ public class SingleIncludePatternFileTree implements MinimalFileTree {
             patternSet.include(includePattern);
             patternSet.exclude(excludeSpec);
             DirectoryFileTree fileTree = new DirectoryFileTree(baseDir, patternSet);
-            fileTree.visitFrom(visitor, file, new RelativePath(file.isFile(), relativePath.toArray(new String[relativePath.size()])));
+            fileTree.visitFrom(visitor, file, new RelativePath(file.isFile(), relativePath.toArray(new String[relativePath.size()])), ignoreBrokenSymlinks);
         } else if (segment.contains("*") || segment.contains("?")) {
             PatternStep step = PatternStepFactory.getStep(segment, false);
             File[] children = file.listFiles();

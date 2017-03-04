@@ -38,7 +38,7 @@ public abstract class AbstractDirectoryWalker implements DirectoryWalker {
     }
 
     @Override
-    public void walkDir(File file, RelativePath path, FileVisitor visitor, Spec<? super FileTreeElement> spec, AtomicBoolean stopFlag, boolean postfix) {
+    public void walkDir(File file, RelativePath path, FileVisitor visitor, Spec<? super FileTreeElement> spec, AtomicBoolean stopFlag, boolean postfix, boolean ignoreBrokenSymlinks) {
         File[] children = getChildren(file);
         if (children == null) {
             if (file.isDirectory() && !file.canRead()) {
@@ -66,11 +66,11 @@ public abstract class AbstractDirectoryWalker implements DirectoryWalker {
         for (int i = 0; !stopFlag.get() && i < dirs.size(); i++) {
             FileVisitDetails dir = dirs.get(i);
             if (postfix) {
-                walkDir(dir.getFile(), dir.getRelativePath(), visitor, spec, stopFlag, postfix);
+                walkDir(dir.getFile(), dir.getRelativePath(), visitor, spec, stopFlag, postfix, ignoreBrokenSymlinks);
                 visitor.visitDir(dir);
             } else {
                 visitor.visitDir(dir);
-                walkDir(dir.getFile(), dir.getRelativePath(), visitor, spec, stopFlag, postfix);
+                walkDir(dir.getFile(), dir.getRelativePath(), visitor, spec, stopFlag, postfix, ignoreBrokenSymlinks);
             }
         }
     }
